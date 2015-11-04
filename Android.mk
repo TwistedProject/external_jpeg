@@ -37,6 +37,12 @@ ifeq ($(TARGET_ARCH),x86)
 endif
 
 ifneq (, $(filter arm, $(strip $(TARGET_ARCH)) $(strip $(TARGET_2ND_ARCH))))
+LOCAL_SRC_FILES_arm64 += \
+        jsimd_arm64_neon.S \
+        jsimd_neon.c
+endif
+
+ifeq ($(strip $(TARGET_ARCH)),arm)
   ifeq ($(ARCH_ARM_HAVE_NEON),true)
     #use NEON accelerations
     LOCAL_CFLAGS_arm += -DNV_ARM_NEON -D__ARM_HAVE_NEON
